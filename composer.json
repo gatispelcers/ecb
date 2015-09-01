@@ -1,0 +1,21 @@
+{
+    "name": "raccoon/ecb",
+    "description": "PHP Wrapper for Bank of Latvia xml currency rate api",
+    "license": "Do Whatever You Want",
+    "authors": [
+        {
+            "name": "Gatis Pelcers",
+            "email": "gatis.pelcers@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "4.8.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Pelcers\\Ecb\\": "src"
+        }
+    }
+}
