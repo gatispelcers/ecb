@@ -97,7 +97,7 @@ class Bank
      * @param $delimiter - string csv delimiting symbol
      * @return string
      */
-    public function toCsv($delimiter)
+    public function toCsv($delimiter = ",")
     {
         $line1 = '';
         $line2 = '';
