@@ -56,7 +56,9 @@ class BankTest extends PHPUnit_Framework_TestCase
         $rates = array('USD' => 1.1111, 'ZAR' => 15.0111);
         $this->bank->setRates($rates);
 
-        $this->assertEquals("USD,ZAR\r\n1.1111,15.0111\r\n", $this->bank->toCsv(','));
+        $this->assertEquals("USD;ZAR\r\n1.1111;15.0111\r\n", $this->bank->toCsv(';'));
+        //default delimiter is ','
+        $this->assertEquals("USD,ZAR\r\n1.1111,15.0111\r\n", $this->bank->toCsv());
     }
 
     /**
