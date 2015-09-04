@@ -1,6 +1,7 @@
-# PHP Wrapper for xml euro currency rate XML Endpoint
+# PHP Wrapper for Euro foreign exchange reference rates published by the European Central Bank in XML format 
 
-PHP Wrapper for Bank of Latvia xml euro currency rate XML Endpoint.
+This is a simple PHP wrapper for Euro exchange rates published by ECB. More information about XML endpoint:
+[https://www.bank.lv/en/component/content/article/8791](https://www.bank.lv/en/component/content/article/8791)
 
 ## Disclaimer
 
@@ -41,6 +42,3 @@ print_r($bank->toObject());
 ## Additional info
 
 Use caching mechanism of your choice to speed things up.
-
-More information about endpoint:
-[https://www.bank.lv/en/component/content/article/8791](https://www.bank.lv/en/component/content/article/8791)
