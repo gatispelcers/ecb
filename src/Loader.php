@@ -1,5 +1,5 @@
 <?php
-namespace Pelcers\Ecb;
+namespace Raccoon\Ecb;
 
 interface Loader
 {

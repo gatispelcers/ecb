@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Pelcers\\Ecb\\": "src"
+            "Raccoon\\Ecb\\": "src"
         }
     }
 }

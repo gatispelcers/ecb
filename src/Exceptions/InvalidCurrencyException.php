@@ -1,5 +1,5 @@
 <?php
-namespace Pelcers\Ecb\Exceptions;
+namespace Raccoon\Ecb\Exceptions;
 
 class InvalidCurrencyException extends \Exception {
     

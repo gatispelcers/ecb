@@ -1,9 +1,8 @@
 <?php
-namespace Pelcers\Ecb;
+namespace Raccoon\Ecb;
 
-use Pelcers\Ecb\Exceptions\InvalidCurrencyException;
-use Pelcers\Ecb\Loader;
-use Pelcers\Ecb\XMLLoader;
+use Raccoon\Ecb\Exceptions\InvalidCurrencyException;
+use Raccoon\Ecb\Loader;
 
 /**
 * Bank
@@ -19,28 +18,21 @@ class Bank
      * @var rates
      */
     protected $rates = array();
-        
-    /**
-     * Construct
-     */
-    public function __construct()
-    {
-        $this->loader = new XMLLoader();
-    }
 
     /**
      * Set Loader
-     * @param $loader - Pelcers\Ecb\Loader
-     * @return void
+     * @param $loader - Raccoon\Ecb\Loader
+     * @return Raccoon\Ecb\Bank
      */
     public function setLoader(Loader $loader)
     {
         $this->loader = $loader;
+        return $this;
     }
 
     /**
      * Load currency rates
-     * @return Pelcers\Ecb\Bank
+     * @return Raccoon\Ecb\Bank
      */
     public function loadRates()
     {
@@ -49,7 +41,7 @@ class Bank
     }
 
     /**
-     * Rates Setter
+     * Set currency rates
      * @param $rates - array
      * @return void
      */
@@ -61,14 +53,13 @@ class Bank
     /**
      * Get rate for single currency
      * @param $currency - string currency code
-     * @throws Pelcers\Ecb\Exceptions\InvalidCurrencyException
+     * @throws Raccoon\Ecb\Exceptions\InvalidCurrencyException
      * @return float
      */
     public function getRate($currency)
     {
-        if (!isset($this->rates[$currency])) {
+        if (!isset($this->rates[$currency]))
             throw new InvalidCurrencyException("The currency '$currency' does not exist!");
-        }
             
         return $this->rates[$currency];
     }
@@ -99,5 +90,23 @@ class Bank
     public function toJson()
     {
         return json_encode($this->rates);
+    }
+
+    /**
+     * All curency rates CSV encoded
+     * @param $delimiter - string csv delimiting symbol
+     * @return string
+     */
+    public function toCsv($delimiter)
+    {
+        $line1 = '';
+        $line2 = '';
+        foreach ($this->rates as $code => $rate) {
+            $line1 .= $code . $delimiter;
+            $line2 .= $rate . $delimiter;
+        }
+        $line1 = rtrim($line1, $delimiter) . "\r\n";
+        $line2 = rtrim($line2, $delimiter). "\r\n";
+        return $line1 . $line2;
     }
 }

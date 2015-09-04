@@ -1,7 +1,7 @@
 <?php
-namespace Pelcers\Ecb;
+namespace Raccoon\Ecb;
 
-use Pelcers\Ecb\Exceptions\InvalidEndPointException;
+use Raccoon\Ecb\Exceptions\InvalidEndPointException;
 
 class XMLLoader implements Loader
 {
@@ -17,9 +17,8 @@ class XMLLoader implements Loader
     public function load()
     {
         $xml = simplexml_load_file($this->endPoint);
-        if (!$xml) {
+        if (!$xml)
             throw new InvalidEndPointException("Endpoint '" . $this->endPoint . "' does not return valid xml");
-        }
             
         return $this->parse($xml);
     }

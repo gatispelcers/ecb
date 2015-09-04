@@ -1,6 +1,6 @@
 <?php
 
-use Pelcers\Ecb\Bank;
+use Raccoon\Ecb\Bank;
 
 class BankTest extends PHPUnit_Framework_TestCase
 {
@@ -24,17 +24,6 @@ class BankTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test correct JSON is returned
-     */
-    public function testRatesCanBeCastToJson()
-    {
-        $rates = array('USD' => 1.1111, 'ZAR' => 15.0111);
-        $this->bank->setRates($rates);
-
-        $this->assertEquals('{"USD":1.1111,"ZAR":15.0111}', $this->bank->toJson());
-    }
-
-    /**
      * Test Rates can be cast to stdObject
      */
     public function testRatesCanBeCastToStdClass()
@@ -46,6 +35,28 @@ class BankTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('stdClass', $ratesToObject);
         $this->assertObjectHasAttribute('USD', $ratesToObject);
         $this->assertEquals(1.1111, $ratesToObject->USD);
+    }
+    
+    /**
+     * Test correct JSON is returned
+     */
+    public function testRatesCanBeCastToJson()
+    {
+        $rates = array('USD' => 1.1111, 'ZAR' => 15.0111);
+        $this->bank->setRates($rates);
+
+        $this->assertEquals('{"USD":1.1111,"ZAR":15.0111}', $this->bank->toJson());
+    }
+
+    /**
+     * Test correct CSV ir returned
+     */
+    public function testRatesCanBeCastToCSV()
+    {
+        $rates = array('USD' => 1.1111, 'ZAR' => 15.0111);
+        $this->bank->setRates($rates);
+
+        $this->assertEquals("USD,ZAR\r\n1.1111,15.0111\r\n", $this->bank->toCsv(','));
     }
 
     /**
@@ -61,7 +72,7 @@ class BankTest extends PHPUnit_Framework_TestCase
 
     /**
      * Test Exception Is Thrown if non-existent rate is required
-     * @expectedException Pelcers\Ecb\Exceptions\InvalidCurrencyException
+     * @expectedException Raccoon\Ecb\Exceptions\InvalidCurrencyException
      */
     public function testExceptionIsThrownForNonExistentRate()
     {
@@ -76,7 +87,7 @@ class BankTest extends PHPUnit_Framework_TestCase
     public function testRatesAreLoadedCorrectly()
     {
         $rates = array('USD' => 1.1111, 'ZAR' => 15.0111);
-        $loader = $this->getMockBuilder('Pelcers\Ecb\XMLLoader')
+        $loader = $this->getMockBuilder('Raccoon\Ecb\XMLLoader')
                     ->setMethods(array('load'))
                     ->getMock();
 
